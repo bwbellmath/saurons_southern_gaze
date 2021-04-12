@@ -25,17 +25,19 @@ L = cxof/2
 H = np.sqrt(R**2 - (cxof/2)**2)
 lwidth = 0.1
 
-annotate_index = sys.argv[1]
 if (len(sys.argv) < 2):
   print("Missing \"Row Progress\" argument (e.g. 10)")
   annotate_index = 0
-elif (sys.argv[1] == "-i"):
-  # if you're running this manually
-  annotate_index = 0
 else:
-  annotate_index = int(sys.argv[1])+1
+  try:
+    annotate_index = int(sys.argv[1])
+  except ValueError:
+    print("WARNING : [progress rows] should be int but got : \"{}\"".format(sys.argv[1]))
+    print("Assuming [progress rows] is 0")
+    annotate_index = 0
+
   
-print("Progress: {} rows".format(annotate_index))
+print("Progress: {} rows -> southern_progress.txt".format(annotate_index))
 print("Progress: {} rows".format(annotate_index).format(annotate_index), file=open("southern_progress.txt", "w"))
 with open(fo, "w") as text_file:
   print(str_begin, file=text_file)
@@ -53,7 +55,7 @@ with open(fo, "w") as text_file:
   for r in pre[1:]:
     j = int(np.floor(r/sr)+1)
     jj = int(np.floor(r/(sr/2) + 1))
-    if (jjj - 100000 < int(annotate_index)):
+    if (jjj - 100001 < int(annotate_index)):
       #print("Printing Red Ring {}".format(j))
       colore="#ff0000"
     else:
@@ -166,7 +168,7 @@ with open(fo, "w") as text_file:
     if (j % 20 == 0):
       mod_factor = 8.0
 
-    if (j < int(annotate_index)):
+    if (j < int(annotate_index)+1):
       #print("Printing Red Ring {}".format(j))
       colore="#ff0000"
     else:
