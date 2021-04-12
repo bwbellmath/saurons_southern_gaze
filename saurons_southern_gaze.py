@@ -1,6 +1,6 @@
 import numpy as np
 import sys
-fo = "nightsky_shawl-south.svg"
+fo = "saurons_southern_gaze.svg"
 fi = "southern_begin.txt"
 with open(fi, "r") as tf:
   str_begin = tf.read()
